@@ -54,14 +54,18 @@ class FirstViewController: UIViewController {
     }
     
     @IBAction @objc
-    public func buttonTapped(_ sender: UIButton) {
-        let loginInformation = LoginInformation(email: emailTextField.text,
-                                                password: passwordTextField.text)
-        
-        jsonData.writeToJsonFile(loginInformation)
-        
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SecondViewController")
-        navigationController?.setViewControllers([viewController], animated: true)
+    func buttonTapped(_ sender: UIButton) {
+        guard emailTextField.text == "" && passwordTextField.text == "" else {
+            let loginInformation = LoginInformation(email: emailTextField.text,
+                                                    password: passwordTextField.text)
+            
+            jsonData.writeToJsonFile(loginInformation)
+            
+            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SecondViewController")
+            navigationController?.setViewControllers([viewController], animated: true)
+            
+            return
+        }
     }
     
     @objc
